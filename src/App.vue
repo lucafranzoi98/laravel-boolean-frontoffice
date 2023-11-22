@@ -9,6 +9,7 @@ export default {
         <div class="row">
             <div class="col-6 m-auto">
                 <h1>ciao</h1>
+                <h2>a tutti</h2>
             </div>
         </div>
     </div>
