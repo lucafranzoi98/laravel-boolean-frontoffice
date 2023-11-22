@@ -1,17 +1,22 @@
 <script>
-export default {
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 
+export default {
+    name: 'App',
+    components: {
+        AppHeader,
+        AppFooter
+    }
 }
 </script>
 
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-6 m-auto">
-                <h1>ciao</h1>
-                <h2>a tutti</h2>
-                <h3>ma proprio tutti</h3>
-            </div>
+    <AppHeader></AppHeader>
+    <main class="py-5">
+        <div class="container">
+            <h1>Title</h1>
         </div>
-    </div>
+    </main>
+    <AppFooter></AppFooter>
 </template>
