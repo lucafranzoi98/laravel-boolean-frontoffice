@@ -11,6 +11,7 @@ export default {
         }
     },
     methods: {
+
         ingredientsDecode (){
             this.ingredients = JSON.parse(this.cocktail.ingredients);
         },
@@ -22,6 +23,7 @@ export default {
     mounted(){
         this.ingredientsDecode();
         this.measuresDecode();
+
     }
 }
 </script>
@@ -34,6 +36,7 @@ export default {
         <div class="card-body h-100 d-flex flex-column justify-content-around">
             <h3 class="text-center text-truncate text-danger">{{ cocktail.name }}</h3>
             <div class="d-flex justify-content-center flex-wrap">
+
                 <small class="badge rounded-pill text-bg-danger m-1" v-for="ingredient in this.ingredients">{{
                     ingredient }}</small>
                 <small class="badge rounded-pill text-bg-primary m-1" v-for="measure in this.measures">{{
