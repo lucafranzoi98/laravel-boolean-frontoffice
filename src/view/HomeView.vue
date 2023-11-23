@@ -8,8 +8,40 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-    name: 'HomeView'
+    name: 'HomeView',
+    data() {
+        return {
+            apiURL: 'http://127.0.0.1:8000/api/cocktails',
+            cocktails: [],
+            currentPage: null
+
+        }
+    },
+    methods: {
+
+        apiCall() {
+            axios.get(this.apiURL)
+                .then(response => {
+                    this.currentPage = response.data.result.current_page;
+                    this.cocktails = response.data.result.data;
+                    console.log('pagina:' + this.currentPage);
+                    console.log('cocktail:' + this.cocktails);
+
+
+
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+
+    },
+    mounted() {
+        this.apiCall()
+    },
 }
 </script>
 
