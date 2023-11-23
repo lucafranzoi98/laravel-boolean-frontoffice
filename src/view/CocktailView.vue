@@ -33,7 +33,7 @@ export default {
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2 fs-6">
             <div class="col py-5">
-                <img :src="this.cocktail.thumb" alt="">
+                <img class="img-fluid" :src="this.cocktail.thumb" alt="">
             </div>
             <div class="col">
                 <div class="container py-5">
