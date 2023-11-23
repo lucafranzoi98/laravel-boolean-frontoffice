@@ -12,6 +12,7 @@ export default {
     },
     methods: {
 
+
         ingredientsDecode (){
             this.ingredients = JSON.parse(this.cocktail.ingredients);
         },
@@ -24,14 +25,17 @@ export default {
         this.ingredientsDecode();
         this.measuresDecode();
 
+
     }
 }
 </script>
 
 <template>
-    <div class="card h-100 bg-dark">
+    <router-link :to="{ name: 'Cocktail', params: { slug: cocktail.slug } }">
 
-        <img :src="cocktail.thumb" alt="">
+        <div class="card h-100 bg-dark">
+
+            <img :src="cocktail.thumb" alt="">
 
         <div class="card-body h-100 d-flex flex-column justify-content-around">
             <h3 class="text-center text-truncate text-danger">{{ cocktail.name }}</h3>
@@ -50,12 +54,13 @@ export default {
             </div>
             <div class="d-flex justify-content-between py-1">
                 <h4 class="text-light">{{ cocktail.alcholic }}</h4>
+
             </div>
             <div class="d-flex justify-content-between py-1">
                 <h4 class="text-light">{{ cocktail.category }}</h4>
             </div>
         </div>
-    </div>
+    </router-link>
 </template>
 
 
