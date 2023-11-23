@@ -10,10 +10,9 @@ export default {
             <div class="site-map">
                 <div class="fw-semibold text-uppercase fs-5 mb-2">Site map</div>
 
-                <!-- Change from a to router-ink -->
-                <a class="nav-link" aria-current="page" href="#">Home</a>
-                <a class="nav-link" aria-current="page" href="#">About</a>
-                <a class="nav-link" aria-current="page" href="#">Contacts</a>
+                <router-link class="nav-link" to="/">Home</router-link>
+                <router-link class="nav-link" to="/about">About</router-link>
+                <router-link class="nav-link" to="/contacts">Contacts</router-link>
             </div>
         </div>
     </footer>

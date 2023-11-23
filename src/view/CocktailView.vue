@@ -9,8 +9,6 @@ export default {
             cocktail: {},
             ingredients: [],
             measures: [],
-            loaded: false,
-
         }
     },
     methods: {
@@ -19,34 +17,15 @@ export default {
             axios.get(this.apiURL + this.$route.params.slug)
                 .then(response => {
                     this.cocktail = response.data.result
-                    console.log(this.cocktail);
-                    console.log(JSON.parse(this.cocktail.ingredients));
-                    
+                    this.ingredients = JSON.parse(this.cocktail.ingredients);
+                    this.measures = JSON.parse(this.cocktail.measures);
+                    console.log(this.ingredients, this.measures);
                 })
-            this.ingredientsDecode();
-            this.measuresDecode();
         },
-
-        ingredientsDecode() {
-
-            this.ingredients = JSON.parse(this.cocktail.ingredients);
-
-        },
-
-        measuresDecode() {
-
-            this.measures = JSON.parse(this.cocktail.measures);
-
-        }
-
     },
     mounted() {
         this.cocktailApiCall()
-
     },
-    components: {
-
-    }
 }
 </script>
 
@@ -65,8 +44,8 @@ export default {
                             <small class="badge rounded-pill text-bg-danger m-1" v-for="ingredient in this.ingredients">{{
                                 ingredient }}</small>
                         </div>
-                        <span class="badge rounded-pill text-bg-primary m-1" v-for="measure in this.cocktail.measures">
-                            {{ measure.name }}
+                        <span class="badge rounded-pill text-bg-primary m-1" v-for="measure in this.measures">
+                            {{ measure }}
                         </span>
                     </div>
                     <h1>{{ this.cocktail.instructions }}</h1>
@@ -75,18 +54,9 @@ export default {
                         <h4>{{ this.cocktail.alcholic }}</h4>
                     </div>
 
-
-
-                    <ul class="d-flex p-0">
-                        <li class="list-unstyled me-2">
-
-                        </li>
-                        <li class="list-unstyled">
-
-                        </li>
-                    </ul>
-
-
+                    <div class="row">
+                        <h4>{{ this.cocktail.category }}</h4>
+                    </div>
                 </div>
             </div>
         </div>
