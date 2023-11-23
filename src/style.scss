@@ -1,1 +1,38 @@
 @use '../node_modules/bootstrap/scss/bootstrap.scss';
+
+$alcoholic: #E76F51;
+$alcoholic-free: #2A9D8F;
+$bg-image-dark: #C3C2C7;
+$bg-image-light: #ECEBED;
+$bg-card: #F9F8F9;
+$shadow-img: #727177;
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.alcoholic {
+    background-color: $alcoholic;
+}
+
+.alcoholic-free {
+    background-color: $alcoholic-free;
+}
+
+.cocktail-image {
+    clip-path: circle();
+}
+
+.background-top {
+    background: linear-gradient(-135deg, $bg-image-light, $bg-image-dark);
+    border-bottom-left-radius: 50% 10%;
+    border-bottom-right-radius: 50% 10%;
+}
+
+.bg-card{
+    background-color: $bg-card;
+}
+
+.shadow-image{
+    filter: drop-shadow(0rem 0.75rem 0.75rem $shadow-img);
+}

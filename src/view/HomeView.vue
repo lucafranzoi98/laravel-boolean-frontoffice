@@ -7,8 +7,8 @@
         </div>
     </div>
 
-    <div class="container mb-3">
-        <div class="row row-cols-3 g-3">
+    <div class="container mb-5">
+        <div class="row row-cols-1 row-cols-lg-3 g-4">
             <div class="col" v-for="cocktail in cocktails">
                 <AppCard :cocktail="cocktail"></AppCard>
             </div>

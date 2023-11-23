@@ -189,3 +189,7 @@ public function store(Request $request)
     ]);
 }
 ```
+
+# Da cancellare
+## Problema con ingredienti e misure
+https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Blue%20Lagoon
