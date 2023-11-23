@@ -2,9 +2,16 @@
 export default {
     name: 'AppCard',
     props: {
+        cocktail: Object
     },
     data() {
         return {
+
+        }
+    },
+    methods: {
+        jsonDecode (){
+            JSON.parse(this.cocktail.ingredients);
         }
     }
 }
@@ -18,8 +25,12 @@ export default {
         <div class="card-body h-100 d-flex flex-column justify-content-around">
             <h3 class="text-center text-truncate text-danger">{{ cocktail.name }}</h3>
             <div class="d-flex justify-content-center flex-wrap">
-                <small class="badge rounded-pill text-bg-danger m-1" v-for="ingredient in cocktail.ingredients">{{
-                    ingredient.name }}</small>
+                <!-- <small class="badge rounded-pill text-bg-danger m-1" v-for="ingredient in cocktail.ingredients">{{
+                    ingredient.name }}</small> -->
+                    <div class="text-white">
+
+                        {{ cocktail.ingredients }}
+                    </div>
                 <small class="badge rounded-pill text-bg-primary m-1" v-for="measure in cocktail.measures">{{
                     measure.name }}</small>
             </div>
@@ -37,4 +48,4 @@ export default {
 </template>
 
 
-<style lang="scss" scoped> </style>
+<style lang="scss" scoped></style>
