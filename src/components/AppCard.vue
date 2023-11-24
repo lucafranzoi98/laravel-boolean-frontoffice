@@ -65,4 +65,29 @@ export default {
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.card {
+  border-radius: 15px;
+  background: white;
+  border: 2px solid white;
+  display: flex;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(black, 0.5);
+
+  &:hover {
+    transform: translateY(20px);
+}
+    &:before {
+      opacity: 1;
+    }
+     
+    img {
+    width: 100% ;
+    height: 100% ;
+    object-fit: cover ;
+    border-radius: 15px ;
+    }
+}
+
+</style>
