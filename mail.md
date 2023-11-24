@@ -301,3 +301,21 @@ this.errors = []
 ```
 - campo già settato nei data come array vuoto, con questa riassegnazione vado a svuotare gli errori eventualmente ottenuti in precedenza
 
+6. aggiungo nei data return 
+```javascript
+formSend : false
+```
+- prima della chiamata axios lascio su false
+```javascript
+this.formSend = false
+```
+- nell'else della chiamata axios (dove svuoto i campi) lo setto su true, in modo che mostra il banner di conferma inserito nel codice
+```javascript
+this.formSend = true
+```
+- banner:
+```html
+<div class="alert alert-success mt-2" role="alert" v-if="formSend">
+                <strong>Form send </strong>
+            </div>
+```
