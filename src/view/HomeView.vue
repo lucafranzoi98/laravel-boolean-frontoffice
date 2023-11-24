@@ -9,24 +9,38 @@ export default {
     },
     data() {
         return {
-            apiURL: 'http://127.0.0.1:8000/api/cocktails',
+            apiURL: 'http://127.0.0.1:8000/api/cocktails/?page=',
             cocktails: [],
-            currentPage: null
-
+            currentPage: null,
+            lastPage: null
         }
     },
     methods: {
+        nextPage() {
+            if (this.currentPage === this.lastPage) {
+                this.currentPage = 1;
+            } else {
+                this.currentPage++;
+            }
+            this.apiCall()
+        },
+        prevPage() {
+            if (this.currentPage = 1) {
+                this.currentPage = this.lastPage;
+            } else {
+                this.currentPage--;
+            }
+            this.apiCall()
+        },
 
         apiCall() {
-            axios.get(this.apiURL)
+            axios.get(this.apiURL + this.currentPage)
                 .then(response => {
                     this.currentPage = response.data.result.current_page;
                     this.cocktails = response.data.result.data;
-                    console.log('pagina:' + this.currentPage);
-                    console.log('cocktail:' + this.cocktails);
-
-
-
+                    //console.log('pagina:' + this.currentPage);
+                    //console.log('cocktail:' + this.cocktails);
+                    this.lastPage = response.data.result.last_page;
                 })
                 .catch(error => {
                     console.log(error);
@@ -54,27 +68,36 @@ export default {
             <div class="col" v-for="cocktail in cocktails">
                 <AppCard :cocktail="cocktail"></AppCard>
             </div>
+
+        </div>
+        <div class="row mt-4 ">
+            <div class="prev w-50 text-start" @click="prevPage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                    class="bi bi-arrow-bar-left text-white" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
+                </svg>
+            </div>
+            <div class="next w-50 text-end" @click="this.nextPage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                    class="bi bi-arrow-bar-right text-white" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5" />
+                </svg>
+            </div>
         </div>
     </div>
 </template>
 
 
 <style lang="scss" scoped>
-
-
 .background_jumbo {
     background-image: url(../assets/image/brand.png);
     width: 100px;
     background-size: 30%;
     background-repeat: no-repeat;
-    background-position: right 10% bottom 45% ;
+    background-position: right 10% bottom 45%;
     border: 2px solid grey;
-    
+
 }
-
-
-
-
-
-
 </style>
