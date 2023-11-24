@@ -25,7 +25,7 @@ export default {
             this.apiCall()
         },
         prevPage() {
-            if (this.currentPage = 1) {
+            if (this.currentPage === 1) {
                 this.currentPage = this.lastPage;
             } else {
                 this.currentPage--;
