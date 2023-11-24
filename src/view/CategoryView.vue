@@ -9,7 +9,7 @@ export default {
     },
     data() {
         return {
-            apiURL: 'http://127.0.0.1:8000/api/cocktails/?page=',
+            apiURL: 'http://127.0.0.1:8000/api/cocktails/category/',
             cocktails: [],
             currentPage: null,
             lastPage: null,
@@ -39,7 +39,7 @@ export default {
 
 
         apiCall() {
-            axios.get(this.apiURL + this.currentPage)
+            axios.get(`${this.apiURL}${this.filter}/?page=${this.currentPage}`)
                 .then(response => {
                     this.currentPage = response.data.result.current_page;
                     this.cocktails = response.data.result.data;
@@ -50,11 +50,18 @@ export default {
                 .catch(error => {
                     console.log(error);
                 })
-        }
+
+        },
+        filterCocktails(filter) {
+            this.filter = filter;
+            this.apiCall();
+            console.log(this.filter);
+
+
+        },
 
     },
     mounted() {
-        this.apiCall()
     },
 }
 </script>
@@ -63,25 +70,24 @@ export default {
     <!-- Jumbo -->
     <div class="p-5 mb-4 bg-light rounded-3 bg-dark w-75 m-auto shadow mt-2 background_jumbo">
         <div class="container  py-5 ">
+            <h1 class="text-white">filtrata</h1>
+
             <h1 class="display-5 fw-bold text-danger">CocktailBar for Dev</h1>
             <p class="col-md-8 fs-4 text-white">After a day on the code, the best way to restore your mind</p>
         </div>
         <div class="row">
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="btnradio" id="radio1" autocomplete="off" checked
-                    v-model="this.filter" value="">
-                <label class="btn btn-outline-light" for="radio1">Tutti i Cocktail</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="radio2" autocomplete="off" v-model="filter"
-                    value="Alcoholic">
+                <button type="radio" class="btn-check" id="radio2" autocomplete="off"
+                    @click="filterCocktails('Alcoholic')"></button>
                 <label class="btn btn-outline-light" for="radio2">Alcolici</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="radio3" autocomplete="off" v-model="filter"
-                    value="Non alcoholic">
+                <button type="radio" class="btn-check" id="radio3" autocomplete="off"
+                    @click="filterCocktails('Non alcoholic')"></button>
                 <label class="btn btn-outline-light" for="radio3">Analcolici</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="radio4" autocomplete="off" v-model="filter"
-                    value="Optional alcohol">
+                <button type="radio" class="btn-check" id="radio4" autocomplete="off"
+                    @click="filterCocktails('Optional alcohol')"></button>
                 <label class="btn btn-outline-light" for="radio4">Alcol Opzionale</label>
             </div>
         </div>

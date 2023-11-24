@@ -4,6 +4,8 @@ import HomeView from './view/HomeView.vue';
 import AboutView from './view/AboutView.vue';
 import CocktailView from './view/CocktailView.vue';
 import ContactsView from './view/ContactsView.vue';
+import CategoryView from './view/CategoryView.vue';
+
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -27,6 +29,11 @@ const router = createRouter({
             path: '/contacts',
             name: 'contacts',
             component: ContactsView
+        },
+        {
+            path: '/filter',
+            name: 'filter',
+            component: CategoryView
         }
     ]
 });
