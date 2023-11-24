@@ -31,8 +31,7 @@ export default {
 </script>
 
 <template>
-    <!-- Old -->
-    <!-- <router-link class="text-decoration-none" :to="{ name: 'Cocktail', params: { slug: cocktail.slug } }">
+    <router-link class="text-decoration-none" :to="{ name: 'Cocktail', params: { slug: cocktail.slug } }">
 
         <div class="card h-100 bg-dark">
 
@@ -59,40 +58,6 @@ export default {
                 </div>
                 <div class="d-flex justify-content-between py-1">
                     <h4 class="text-light">{{ cocktail.category }}</h4>
-                </div>
-            </div>
-        </div>
-    </router-link> -->
-
-    <!-- New -->
-    <router-link class="text-decoration-none" :to="{ name: 'Cocktail', params: { slug: cocktail.slug } }">
-
-        <div class="card h-100 rounded-5 shadow border-0 bg-card">
-            <div class="card-img-top rounded-top-5 background-top p-5 pb-4 text-center">
-                <div class="shadow-image">
-                    <img class="cocktail-image mb-4 w-100" :src="cocktail.thumb">
-                </div>
-                <h4 class="card-title fs-1 fw-semibold">{{ cocktail.name }}</h4>
-                <h6 class="card-subtitle text-muted fw-semibold mb-3">{{ cocktail.category }}</h6>
-            </div>
-            <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
-                <div>
-                    <p class="card-text fst-italic">{{ cocktail.instructions }}</p>
-                    <div class="d-flex justify-content-between px-4">
-                        <ul class="list-unstyled d-flex flex-column align-items-start">
-                            <li class="fw-semibold">Ingredients</li>
-                            <li v-for="ingredient in this.ingredients">{{ ingredient }}</li>
-                        </ul>
-                        <ul class="list-unstyled d-flex flex-column align-items-end">
-                            <li class="fw-semibold">Measures</li>
-                            <li v-for="measure in this.measures">{{ measure }}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <hr>
-                    <div class="badge" :class="cocktail.alcholic == 'Alcoholic' ? 'alcoholic' : 'alcoholic-free'">{{
-                        cocktail.alcholic }}</div>
                 </div>
             </div>
         </div>
