@@ -183,6 +183,14 @@ public function store(Request $request)
 ```php
 public function store(Request $request)
 {
+    /* aggiungo questo */
+    $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
+
     return response()->json([
         'success':true,
         'result'=>$request->all()
@@ -190,6 +198,124 @@ public function store(Request $request)
 }
 ```
 
-# Da cancellare
-## Problema con ingredienti e misure
-https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Blue%20Lagoon
+4. poi inserisco un controllo nella funzione store
+```php
+public function store(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
+
+    /* aggiungo questo per salvare gli errori di validazione in errors*/
+    if($validator -> fails()){
+        return response()->json([
+            'success'=>false,
+            'errors' => $validato->errors()
+        ]);
+    }
+
+    return response()->json([
+        'success':true,
+        'result'=>$request->all()
+    ]);
+}
+
+```
+
+5. poi salviamo in una variabile il Modello Lead
+```php
+public function store(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
+
+    if($validator -> fails()){
+        return response()->json([
+            'success'=>false,
+            'errors' => $validato->errors()
+        ]);
+    }
+
+    /* aggiungo questo per salvare nel database le mail che riceviamo*/
+    $lead = Lead::create($request->all());
+
+    /* con questo invio la mail */
+    Mail::to('< mail che riceve le mail dal form >')->send( new NewLeadEmail( $lead ));
+
+
+    return response()->json([
+        'success':true,
+        'result'=>' form sent succesfully' /* modifico il messaggio di conferma di invio della mail */
+    ]);
+}
+
+```
+### torno in front end
+
+1. vado nella view dove ho il form e nella chiamata Axios inserisco : 
+```javascript
+const success = response.data.success
+
+            if (!success) {
+                this.errors = response.data.errors
+                    console.log(response.data.errors);
+                } else {
+                    console.log(response);
+                    this.name = ''
+                    this.email = ''
+                    this.phone = ''
+                    this.message = ''
+                }
+``` 
+   - in modo da svuotare i campi in caso di mail inviata
+
+2. prima di fare la chiamta axios inserisco, per modificare la variabile loading
+```javascript
+this.loading = true
+```
+- quando finisce la chiamata setto su false, in questo modo posso inserire un animazione durante l'invio
+
+3. nel form inserisco
+```html
+<button type="submit" :disabled = "loading"> {{loading ? 'sending...' : '' }}</button>
+```
+- così ho annullato la possibilità di cliccare il bottone quando il form sta inviando i dati
+
+4. negli input del form aggiungo
+```html
+<input type="text" class="form-control" :class="{ 'is-invalid': errors.name }" id="name"
+                        placeholder="Mario Rossi" v-model="name">
+```
+- dove ogni campo ha il suo error.< nome del campo >
+
+5. inserisco prima della chiammata axios
+```javascript
+this.errors = []
+```
+- campo già settato nei data come array vuoto, con questa riassegnazione vado a svuotare gli errori eventualmente ottenuti in precedenza
+
+6. aggiungo nei data return 
+```javascript
+formSend : false
+```
+- prima della chiamata axios lascio su false
+```javascript
+this.formSend = false
+```
+- nell'else della chiamata axios (dove svuoto i campi) lo setto su true, in modo che mostra il banner di conferma inserito nel codice
+```javascript
+this.formSend = true
+```
+- banner:
+```html
+<div class="alert alert-success mt-2" role="alert" v-if="formSend">
+                <strong>Form send </strong>
+            </div>
+```
