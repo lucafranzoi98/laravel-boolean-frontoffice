@@ -44,9 +44,11 @@ export default {
                             <small class="badge rounded-pill text-bg-danger m-1" v-for="ingredient in this.ingredients">{{
                                 ingredient }}</small>
                         </div>
-                        <span class="badge rounded-pill text-bg-primary m-1" v-for="measure in this.measures">
-                            {{ measure }}
-                        </span>
+                        <div class="">
+                            <span class="badge rounded-pill text-bg-primary m-1" v-for="measure in this.measures">
+                                {{ measure }}
+                            </span>
+                        </div>
                     </div>
                     <h1>{{ this.cocktail.instructions }}</h1>
 
