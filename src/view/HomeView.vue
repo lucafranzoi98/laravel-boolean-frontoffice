@@ -66,25 +66,7 @@ export default {
             <h1 class="display-5 fw-bold text-danger">CocktailBar for Dev</h1>
             <p class="col-md-8 fs-4 text-white">After a day on the code, the best way to restore your mind</p>
         </div>
-        <div class="row">
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="btnradio" id="radio1" autocomplete="off" checked
-                    v-model="this.filter" value="">
-                <label class="btn btn-outline-light" for="radio1">Tutti i Cocktail</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="radio2" autocomplete="off" v-model="filter"
-                    value="Alcoholic">
-                <label class="btn btn-outline-light" for="radio2">Alcolici</label>
-
-                <input type="radio" class="btn-check" name="btnradio" id="radio3" autocomplete="off" v-model="filter"
-                    value="Non alcoholic">
-                <label class="btn btn-outline-light" for="radio3">Analcolici</label>
-
-                <input type="radio" class="btn-check" name="btnradio" id="radio4" autocomplete="off" v-model="filter"
-                    value="Optional alcohol">
-                <label class="btn btn-outline-light" for="radio4">Alcol Opzionale</label>
-            </div>
-        </div>
     </div>
 
     <div class="container mb-5 ">
