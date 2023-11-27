@@ -39,6 +39,7 @@ export default {
 
 
         apiCall() {
+            this.cocktails = [];
             axios.get(this.apiURL + this.currentPage)
                 .then(response => {
                     this.currentPage = response.data.result.current_page;
